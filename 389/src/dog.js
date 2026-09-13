@@ -22,6 +22,11 @@ export function dog_draw(mouse) {
 }
 
 export function dog_frame(mouse) {
+    if (Math.random() < 0.005) {
+        document
+            .getElementById("woof" + Math.floor(Math.random() * 3 + 1))
+            .play();
+    }
     const angle = Math.atan2(mouse.y - (dog.y + 16), mouse.x - (dog.x + 16));
 
     dog.angle = angle;
