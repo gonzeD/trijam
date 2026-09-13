@@ -9,7 +9,7 @@ const MS_PER_FRAME = 16;
 let keys = [];
 window.gameState = "playing";
 window.frameCount = 0;
-window.level = 1;
+window.level = 10;
 window.timers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 let lastTimestamp;
 let accumulatedDelta;
