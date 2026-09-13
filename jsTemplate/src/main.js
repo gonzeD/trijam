@@ -38,7 +38,7 @@ requestAnimationFrame((e) => {
     lastTimestamp = document.timeline.currentTime;
 
     /* load all assets */
-    loadImg("test.bmp", "test");
+    loadImg("test.bmp", "test", 16);
     loop(e);
 });
 
@@ -63,6 +63,6 @@ function loop(timestamp) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     text("this is a big black text", 540.5, 50, 20);
-    drawImg("test", 50, 50);
+    drawImg("test", 50, 50, 0);
     requestAnimationFrame(loop);
 }
