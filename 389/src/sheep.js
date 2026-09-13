@@ -62,6 +62,12 @@ export function sheep_frame(fleePoint) {
     }
 
     sheeps.forEach((sheep) => {
+        if (Math.random() < 0.0005) {
+            document
+                .getElementById("sheep" + Math.floor(Math.random() * 3 + 1))
+                ?.play();
+        }
+
         const dist = Math.sqrt(
             (sheep.x + 16 - fleePoint.x) ** 2 +
                 (sheep.y + 16 - fleePoint.y) ** 2,
@@ -96,5 +102,6 @@ export function sheep_frame(fleePoint) {
     ) {
         window.timers[window.level] = Math.floor(window.frameCount / 60);
         window.gameState = "win";
+        document.getElementById("congrats")?.play();
     }
 }
