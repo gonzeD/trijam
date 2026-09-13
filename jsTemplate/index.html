@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>jstemplate</title>
+
+        <style>
+            html,
+            body,
+            #app {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            canvas {
+                width: 960px;
+                height: 540px;
+                margin: auto;
+                outline: 5px solid black;
+                image-rendering: optimizeSpeed;
+                image-rendering: crisp-edges;
+                image-rendering: -moz-crisp-edges;
+                image-rendering: -o-crisp-edges;
+                image-rendering: -webkit-crisp-edges;
+                image-rendering: pixelated;
+                image-rendering: crisp-edges;
+                font-smooth: never;
+                -webkit-font-smoothing: none;
+            }
+            @font-face {
+                font-family: "pixel";
+                src: url("fonts/lowerpixel.otf");
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <canvas id="canvas"></canvas>
+        </div>
+        <script type="module" src="/src/main.js"></script>
+    </body>
+</html>
