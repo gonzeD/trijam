@@ -1,16 +1,22 @@
 import { drawImg } from "./draw";
 import { text } from "./helper";
+import { levels } from "./levels";
 
 let sheeps = [];
-let target = {
-    x: 960 / 2,
-    y: 540 / 2,
-    radius: 100,
-};
+let target = {};
 const PAD = 20;
 
 export function sheep_init() {
-    for (let i = 0; i < 50; i++) {
+    const l = levels[window.level];
+
+    sheeps = [];
+    target = {
+        x: 960 / 2,
+        y: 540 / 2,
+        radius: 100,
+    };
+
+    for (let i = 0; i < l.sheep; i++) {
         sheeps.push({
             x: Math.random() * 800 + 50,
             y: Math.random() * 400 + 50,
@@ -22,7 +28,7 @@ export function sheep_init() {
 }
 export function sheep_draw() {
     ctx.beginPath();
-    ctx.arc(960 / 2, 540 / 2, target.radius, 0, 2 * Math.PI);
+    ctx.arc(target.x, target.y, target.radius, 0, 2 * Math.PI);
     ctx.stroke();
 
     sheeps
@@ -32,7 +38,7 @@ export function sheep_draw() {
                 "sheep",
                 sheep.x,
                 sheep.y,
-                Math.floor((frame + sheep.delay) / 5) % 8,
+                Math.floor((window.frameCount + sheep.delay) / 5) % 8,
                 sheep.reverse,
             );
         });
@@ -47,6 +53,14 @@ export function sheep_draw() {
 
 const RADIUS = 12;
 export function sheep_frame(fleePoint) {
+    const l = levels[window.level];
+    if (l.moveX) {
+        target.x = (Math.sin(window.frameCount / l.moveX) * 600) / 2 + 960 / 2;
+    }
+    if (l.moveY) {
+        target.y = (Math.sin(window.frameCount / l.moveY) * 300) / 2 + 540 / 2;
+    }
+
     sheeps.forEach((sheep) => {
         const dist = Math.sqrt(
             (sheep.x + 16 - fleePoint.x) ** 2 +
@@ -75,4 +89,12 @@ export function sheep_frame(fleePoint) {
             sheep.inside = false;
         }
     });
+
+    if (
+        sheeps.filter((x) => x.inside).length === sheeps.length &&
+        window.gameState != "win"
+    ) {
+        window.timers[window.level] = Math.floor(window.frameCount / 60);
+        window.gameState = "win";
+    }
 }
